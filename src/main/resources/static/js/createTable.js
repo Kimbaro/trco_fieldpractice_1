@@ -85,7 +85,7 @@ var createTable = function (age, carbonenRate, device, exerciseIntensity, heart,
     ca_td3_span_carbonen_rate.setAttribute("id", db_device_name + "carbonenRate");
     ca_td3_span_carbonen_rate.innerText = carbonenRate;
     var ca_td3_span_carbonen_rate_icon = document.createElement('img');
-    ca_td3_span_carbonen_rate_icon.setAttribute("src", "icon/carbonenRate.svg");
+    ca_td3_span_carbonen_rate_icon.setAttribute("src", "/icon/carbonenRate.svg");
     ca_td3_span_carbonen_rate_icon.style.cssFloat = "left";
     ca_td3_2.appendChild(ca_td3_span_carbonen_rate_icon);
     ca_td3_2.appendChild(ca_td3_span_carbonen_rate);

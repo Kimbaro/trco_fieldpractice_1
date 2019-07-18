@@ -1,36 +1,37 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <link rel="stylesheet" href="style.css">
-  <title>모니터링</title>
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet" href="style.css">
+    <title>모니터링</title>
 
-  <!--ajax 구현 !-->
-  <script>
-    var xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function () { // 요청에 대한 콜백
-      if (xhr.readyState === xhr.DONE) { // 요청이 완료되면
-        if (xhr.status === 200 || xhr.status === 201) {
-          console.log(xhr.responseText);
-          var data = JSON.parse(xhr.responseText);
-          console.log(data);
-          for(var i = 0; i<data.length; i++){
-            document.getElementById("json").innerHTML += data[i].name + ", " + data[i].heart + ", " + data[i].age +"<br>";
-          }
-        } else {
-          console.error(xhr.responseText);
+    <!--ajax 구현 !-->
+    <script>
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () { // 요청에 대한 콜백
+            if (xhr.readyState === xhr.DONE) { // 요청이 완료되면
+                if (xhr.status === 200 || xhr.status === 201) {
+                    console.log(xhr.responseText);
+                    var data = JSON.parse(xhr.responseText);
+                    console.log(data);
+                    for (var i = 0; i < data.length; i++) {
+                        document.getElementById("json").innerHTML += data[i].name + ", " + data[i].heart + ", " + data[i].age + "<br>";
+                    }
+                } else {
+                    console.error(xhr.responseText);
 
-        }
-      }
-    };
-    xhr.open('GET', 'https://trco-project.cfapps.io/findAll'); // 메소드와 주소 설정
-    xhr.send(); // 요청 전송
-    // xhr.abort(); // 전송된 요청 취소
-  </script>
+                }
+            }
+        };
+        xhr.open('GET', 'https://trco-project.cfapps.io/findAll'); // 메소드와 주소 설정
+        xhr.send(); // 요청 전송
+        // xhr.abort(); // 전송된 요청 취소
+    </script>
 </head>
 <body>
 <h1>모니터링 시스템</h1>
 <h1 id="json"></h1>
-  <table id="table1">
+<table id="table1">
     <!--<thead>
     <tr>
       <th id="th">이름</th>
@@ -44,67 +45,65 @@
       <td>&nbsp;<img id="heartimg" src="//C:\Users\thdrl\Downloads\heartshape.png">&nbsp;150&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;30세</td>
     </tr>
     </tbody>!-->
-  </table>
-    <table id="table20">
-      <thead>
-      <tr>
-        <th id="th">이름</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr>
-        <td id="tdH1">55%</td>
-      </tr>
-      <tr id="td">
-        <td>&nbsp;<img id="heartimg" src="//C:\Users\thdrl\Downloads\heartshape.png">&nbsp;150&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;30세</td>
-      </tr>
-      </tbody>
-    </table>
+</table>
 <table id="table20">
     <thead>
     <tr>
-      <th id="th">이름</th>
+        <th id="th">이름</th>
     </tr>
     </thead>
     <tbody>
     <tr>
-      <td id="tdH">80%</td>
+        <td id="tdH1">55%</td>
     </tr>
     <tr id="td">
-      <td>&nbsp;<img id="heartimg" src="//C:\Users\thdrl\Downloads\heartshape.png">&nbsp;150&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;30세</td>
+        <td>&nbsp;<img id="heartimg" src="//C:\Users\thdrl\Downloads\heartshape.png">&nbsp;150&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;30세
+        </td>
+    </tr>
+    </tbody>
+</table>
+<table id="table20">
+    <thead>
+    <tr>
+        <th id="th">이름</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td id="tdH">80%</td>
+    </tr>
+    <tr id="td">
+        <td>&nbsp;<img id="heartimg" src="//C:\Users\thdrl\Downloads\heartshape.png">&nbsp;150&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;30세
+        </td>
     </tr>
     </tbody>
 </table>
 
 
 <script>
-  /*function appendNode()  {
-    var newItem = document.getElementById('table20');
-    var test1 = newItem.cloneNode(true);
-    document.getElementById('table1').appendChild(test1);
-  }
-  for(var i=0; i < 20; i++)
-  {
-    appendNode();
-  }*/
-for(var i =0; i <2; i++)
-{
-  var arr = [];
-  arr["tdH1"] = document.getElementById()
-  var forHpercent = document.getElementById('picker').ele;
-  var Hpercenttext = forHpercent.innerText;
-  var HpercentValue = Hpercenttext.slice(0, -1);
-  console.log(HpercentValue);
-  if(Number(HpercentValue) >= 60 && Number(HpercentValue)<= 75)
-  {
-    forHpercent.style.color="yellow";
-  }
-  else if(Number(HpercentValue) > 75 && Number(HpercentValue)<= 100)
-  {
-    forHpercent.style.color="red";
-  }
-}
-
+    /*function appendNode()  {
+      var newItem = document.getElementById('table20');
+      var test1 = newItem.cloneNode(true);
+      document.getElementById('table1').appendChild(test1);
+    }
+    for(var i=0; i < 20; i++)
+    {
+      appendNode();
+    }*/
+    for (var i = 0; i < 2; i++) {
+        var arr = [];
+        arr["tdH1"] = document.getElementById()
+        var forHpercent = document.getElementById('picker').ele;
+        var Hpercenttext = forHpercent.innerText;
+        var HpercentValue = Hpercenttext.slice(0, -1);
+        console.log(HpercentValue);
+        if (Number(HpercentValue) >= 60 && Number(HpercentValue) <= 75) {
+            forHpercent.style.color = "yellow";
+        }
+        else if (Number(HpercentValue) > 75 && Number(HpercentValue) <= 100) {
+            forHpercent.style.color = "red";
+        }
+    }
 
 
 </script>

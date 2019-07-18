@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8"/>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../style.css">
     <title>모니터링</title>
 
     <!--ajax 구현 !-->
@@ -16,6 +16,7 @@
                     console.log(data);
                     for (var i = 0; i < data.length; i++) {
                         document.getElementById("json").innerHTML += data[i].name + ", " + data[i].heart + ", " + data[i].age + "<br>";
+                        callbackFunction();
                     }
                 } else {
                     console.error(xhr.responseText);
@@ -23,9 +24,13 @@
                 }
             }
         };
-        xhr.open('GET', 'https://trco-project.cfapps.io/findAll'); // 메소드와 주소 설정
+        xhr.open('GET', 'http://localhost:8080/findAll'); // 메소드와 주소 설정
         xhr.send(); // 요청 전송
         // xhr.abort(); // 전송된 요청 취소
+
+        function callbackFunction() {
+            alert("ssss");
+        }
     </script>
 </head>
 <body>
@@ -62,22 +67,22 @@
     </tr>
     </tbody>
 </table>
-<table id="table20">
-    <thead>
-    <tr>
-        <th id="th">이름</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-        <td id="tdH">80%</td>
-    </tr>
-    <tr id="td">
-        <td>&nbsp;<img id="heartimg" src="//C:\Users\thdrl\Downloads\heartshape.png">&nbsp;150&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;30세
-        </td>
-    </tr>
-    </tbody>
-</table>
+<!--<table id="table20">-->
+<!--<thead>-->
+<!--<tr>-->
+<!--<th id="th">이름</th>-->
+<!--</tr>-->
+<!--</thead>-->
+<!--<tbody>-->
+<!--<tr>-->
+<!--<td id="tdH">80%</td>-->
+<!--</tr>-->
+<!--<tr id="td">-->
+<!--<td>&nbsp;<img id="heartimg" src="//C:\Users\thdrl\Downloads\heartshape.png">&nbsp;150&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;30세-->
+<!--</td>-->
+<!--</tr>-->
+<!--</tbody>-->
+<!--</table>-->
 
 
 <script>

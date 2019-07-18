@@ -28,5 +28,6 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'de.flapdoodle.embed:de.flapdoodle.embed.mongo'
     testImplementation 'io.projectreactor:reactor-test'
-    compile("org.springframework.boot:spring-boot-starter-thymeleaf")
+    compile group: 'com.google.cloud.tools', name: 'appengine-gradle-plugin', version: '2.0.1'
 }
+
