@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css?family=Do+Hyeon&display=swap&subset=korean');
+@import 'mainMonitoring.html';
+#heartimg{
+  height:20px;
+  width: 20px;
+}
+
+#table20{
+  display:inline;
+  float:left;
+  margin: 1%;
+  background: black;
+  opacity: 0.8;
+  font-family: 'Do Hyeon', sans-serif;
+  border-collapse: collapse;
+  width: 200px;
+  height: 200px;
+  text-align: center;
+}
+
+#th{
+  color: #fff;
+  padding-top: 10px;
+  padding-bottom: 5px;
+  align: center;
+  font-size: 25px;
+}
+
+#td{
+  color: #fff;
+  text-align: left;
+  padding-top: 5px;
+  padding-bottom: 10px;
+  font-size: 20pt;
+}
+
+#tdH1{
+  width: 200px;
+  text-align: center;
+  padding-top: 5px;
+  font-size: 55pt;
+  color: white;
+}
