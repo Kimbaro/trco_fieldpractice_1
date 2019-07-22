@@ -18,29 +18,32 @@ public class DB_Object {
     private String age;
     @Indexed
     private String heart;
-
     @Indexed
-    //안정심박수
     private String stableHeart;
     @Indexed
-    //최대심박수
     private String maximumHeart;
     @Indexed
-    //운동강도
-    private String exerciseIntensity;
+    private String exerciseIntensity_max;
     @Indexed
-    //카르보넨심박수
-    private String carbonenRate;
+    private String exerciseIntensity_min;
+    @Indexed
+    private String carbonenRate_min;
+    @Indexed
+    private String carbonenRate_max;
 
-    public DB_Object(String device, String name, String age, String heart, String stableHeart, String maximumHeart, String exerciseIntensity, String carbonenRate) {
+
+    public DB_Object(String device, String name, String age, String heart, String stableHeart, String maximumHeart, String exerciseIntensity_max, String exerciseIntensity_min, String carbonenRate_min, String carbonenRate_max) {
         this.device = device;
         this.name = name;
         this.age = age;
         this.heart = heart;
         this.stableHeart = stableHeart;
         this.maximumHeart = maximumHeart;
-        this.exerciseIntensity = exerciseIntensity;
-        this.carbonenRate = carbonenRate;
+        this.exerciseIntensity_max = exerciseIntensity_max;
+        this.exerciseIntensity_min = exerciseIntensity_min;
+        this.carbonenRate_min = carbonenRate_min;
+        this.carbonenRate_max = carbonenRate_max;
+
     }
 
 }

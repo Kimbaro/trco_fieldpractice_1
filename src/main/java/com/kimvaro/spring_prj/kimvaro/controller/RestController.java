@@ -1,7 +1,10 @@
 package com.kimvaro.spring_prj.kimvaro.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kimvaro.spring_prj.kimvaro.domain.DB_Object;
 import com.kimvaro.spring_prj.kimvaro.repo.Test_Repo;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -11,6 +14,12 @@ import reactor.core.Disposable;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.logging.Logger;
+
 @CrossOrigin("http://localhost:63344")
 @org.springframework.web.bind.annotation.RestController
 public class RestController {
@@ -18,6 +27,8 @@ public class RestController {
     @Autowired(required = true)
     @Qualifier(value = "repo")
     Test_Repo test_repo;
+    @Qualifier(value = "logset")
+    SomeService someService;
 
     //DBMS SQL Query :: SELECT * FROM <TABLE_NAME>
     @GetMapping(value = "/findAll")
@@ -59,8 +70,10 @@ public class RestController {
 
     //DBMS SQL Query :: INSERT INTO <TABLE_NAME> VALUES(name = <VALUE> , value = <VALUE>)
     @GetMapping(value = "/insert")
-    public Disposable update(@RequestParam("device") String device, @RequestParam("name") String name, @RequestParam("age") String age, @RequestParam("heart") String heart, @RequestParam("stableHeart") String stableHeart, @RequestParam("maximumHeart") String maximumHeart, @RequestParam("exerciseIntensity") String exerciseIntensity, @RequestParam("carbonenRate") String carbonenRate) {
-        return Mono.just(new DB_Object(device, name, age, heart, stableHeart, maximumHeart, exerciseIntensity, carbonenRate)).flatMap(test_repo::save).subscribe(db_object ->
+    public Disposable update(@RequestParam("device") String device, @RequestParam("name") String name, @RequestParam("age") String age, @RequestParam("heart") String heart, @RequestParam("stableHeart") String stableHeart, @RequestParam("maximumHeart") String maximumHeart, @RequestParam("exerciseIntensity_max") String exerciseIntensity_max, @RequestParam("exerciseIntensity_min") String exerciseIntensity_min, @RequestParam("carbonenRate_min") String carbonenRate_min, @RequestParam("carbonenRate_max") String carbonenRate_max)
+
+    {
+        return Mono.just(new DB_Object(device, name, age, heart, stableHeart, maximumHeart, exerciseIntensity_max, exerciseIntensity_min, carbonenRate_min, carbonenRate_max)).flatMap(test_repo::save).subscribe(db_object ->
                 test_repo.findById(db_object.getId())
         );
     }
@@ -76,23 +89,31 @@ public class RestController {
         //  return null;
         test_repo.findById(id).flatMap(db_object -> {
             db_object.setHeart(heart);
+            System.out.println("{'device':'" + db_object.getDevice() + "','heart':'" + db_object.getHeart() + "'}");
             return test_repo.save(db_object);
-        }).subscribe(System.out::println).toString();
+        }).subscribe().toString();
     }
 
+
     @GetMapping(value = "/updateByUserInfo")
-    public boolean updateByUserInfo(@RequestParam("id") String id, @RequestParam("device") String device, @RequestParam("name") String name, @RequestParam("age") String age, @RequestParam("heart") String heart, @RequestParam("stableHeart") String stableHeart, @RequestParam("maximumHeart") String maximumHeart, @RequestParam("exerciseIntensity") String exerciseIntensity, @RequestParam("carbonenRate") String carbonenRate) {
+    public boolean updateByUserInfo(@RequestParam("id") String id, @RequestParam("device") String device, @RequestParam("name") String name, @RequestParam("age") String age, @RequestParam("heart") String heart, @RequestParam("stableHeart") String stableHeart, @RequestParam("maximumHeart") String maximumHeart, @RequestParam("exerciseIntensity_max") String exerciseIntensity_max, @RequestParam("exerciseIntensity_min") String exerciseIntensity_min, @RequestParam("carbonenRate_min") String carbonenRate_min, @RequestParam("carbonenRate_max") String carbonenRate_max) {
         return test_repo.findById(id).flatMap(db_object -> {
             db_object.setHeart(heart);
             db_object.setDevice(device);
             db_object.setName(name);
             db_object.setAge(age);
-            db_object.setCarbonenRate(carbonenRate);
-            db_object.setExerciseIntensity(exerciseIntensity);
             db_object.setMaximumHeart(maximumHeart);
             db_object.setStableHeart(stableHeart);
+            db_object.setExerciseIntensity_max(exerciseIntensity_max);
+            db_object.setExerciseIntensity_min(exerciseIntensity_min);
+            db_object.setCarbonenRate_max(carbonenRate_max);
+            db_object.setCarbonenRate_min(carbonenRate_min);
             return test_repo.save(db_object);
-        }).subscribe(System.out::println).isDisposed();
+        }).subscribe(
+                db_object -> {
+                    System.out.println("{'device':'" + db_object.getDevice() + "','heart':'" + db_object.getHeart() + "'}");
+                }
+        ).isDisposed();
     }
 
 

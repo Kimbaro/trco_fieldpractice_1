@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <script src="js/createTable.js"></script>
-    <script src="js/updateTable.js"></script>
+    <script type="text/javascript" src="/static/js/createTable.js"></script>
+    <script type="text/javascript" src="/static/js/updateTable.js"></script>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 
@@ -29,8 +29,8 @@
 
         #wrapper {
             display: grid;
-            grid-template-columns: repeat(5, 2fr);
-            grid-auto-rows: 200px 200px;
+            grid-template-columns: repeat(4, 2fr);
+            grid-auto-rows: 220px;
             gap: 5px;
         }
     </style>
@@ -57,23 +57,24 @@
                                 console.log("true");
                                 //처음접속
                                 //테이블생성 디바이스 이름으로 아이디구분
-                                createTable(json[i].age, json[i].carbonenRate, json[i].device, json[i].exerciseIntensity, json[i].heart, json[i].id, json[i].maximumHeart, json[i].name, json[i].stableHeart);
+                                createTable(json[i].carbonenRate_max, json[i].carbonenRate_min, json[i].device, json[i].exerciseIntensity_max, json[i].exerciseIntensity_min, json[i].heart, json[i].id, json[i].maximumHeart, json[i].name);
                             } else {
                                 //테이블 업데이트
-                                updateTable(json[i].age, json[i].carbonenRate, json[i].device, json[i].exerciseIntensity, json[i].heart, json[i].id, json[i].maximumHeart, json[i].name, json[i].stableHeart);
+                                updateTable(json[i].carbonenRate_max, json[i].carbonenRate_min, json[i].device, json[i].exerciseIntensity_max, json[i].exerciseIntensity_min, json[i].heart, json[i].id, json[i].maximumHeart, json[i].name);
                                 console.log("false");
                                 var userHaertRate = json[i].heart;
-                                var userCarbonenRate = json[i].carbonenRate;
+                                var userCarbonenRate_min = json[i].carbonenRate_min;
+                                var userCarbonenRate_max = json[i].carbonenRate_max;
                                 var userDevice = json[i].device;
-                                if (parseInt(userHaertRate) < parseInt(userCarbonenRate)) {
+                                if (parseInt(userHaertRate) < parseInt(userCarbonenRate_min) || parseInt(userCarbonenRate_max) < parseInt(userHaertRate)) {
                                     //사용자 심박수가 카르보넨값보다 작을때
-                                    console.log("현재 사용자 심박수가 낮습니다");
-                                    console.log(userDevice + " | " + userHaertRate + " | " + userCarbonenRate);
+                                    console.log("심박수 유효범위를 벗어남.");
+                                    console.log(userDevice + " | " + userHaertRate + " | " + userCarbonenRate_min + " | " + userCarbonenRate_max);
                                     var child_table = document.getElementById(userDevice + "_table");
                                     var parent = child_table.parentNode;
                                     parent.style.backgroundColor = "#CB5D5E";
                                 } else {
-                                    console.log("카르보넨 수치보다 높습니다.");
+                                    console.log("심박수 유효범위 내 진입");
                                     var child_table = document.getElementById(userDevice + "_table");
                                     var parent = child_table.parentNode;
                                     parent.style.backgroundColor = "#9ACD32";
@@ -86,7 +87,7 @@
                     }
                 }
             };
-            xhr.open('GET', 'http://localhost:8080/findAll'); // 메소드와 주소 설정
+            xhr.open('GET', 'https://trco.site:8443/findAll'); // 메소드와 주소 설정
             xhr.send(); // 요청 전송
             // xhr.abort(); // 전송된 요청 취소
         }, 3000);
