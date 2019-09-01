@@ -13,10 +13,15 @@ spring:
 server:
   port: 8443 #SSL 사용할 포트 지정
   ssl:
+#  /usr/games/cert.jks
         enabled: true
-        key-store: cert.jks
+        key-store: /usr/games/cert.jks
         key-store-type: PKCS12
         key-store-password: 123456  # jks 또는 pfx 패스워드
         key-alias: trco.site # (필요시) Alias 명 지정. CSR 자동 생성시에는 CN 명
 
 debug: false
+logging:
+  file: /usr/games/local
+  level:
+      root: info

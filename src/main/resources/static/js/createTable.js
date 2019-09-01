@@ -1,4 +1,4 @@
-var createTable = function (carbonenRate_max, carbonenRate_min, device, exerciseIntensity_max, exerciseIntensity_min, heart, id, maximumHeart, name) {
+var createTable = function (carbonenRate_max, carbonenRate_min, device, exerciseIntensity_max, exerciseIntensity_min, heart, id, maximumHeart, name, num) {
     //테이블 생성 START
     // var people = getParameterByName("people");
 
@@ -29,8 +29,8 @@ var createTable = function (carbonenRate_max, carbonenRate_min, device, exercise
     ca_td1_span_name.setAttribute("id", db_device_name + "_head_name");
     var createName = document.createElement("span");
     createName.setAttribute("id", db_device_name + "name");
-    createName.innerText = name;
-    createName.style.font = "30px bold";
+    createName.innerText = "No." + num + " " +name;
+    createName.style.font = "18px bold";
     ca_td1_span_name.appendChild(createName);
 
     var ca_td1_span_device = document.createElement('span');

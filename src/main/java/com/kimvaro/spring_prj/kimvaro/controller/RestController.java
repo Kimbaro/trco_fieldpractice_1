@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kimvaro.spring_prj.kimvaro.domain.DB_Object;
 import com.kimvaro.spring_prj.kimvaro.repo.Test_Repo;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -18,7 +19,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Logger;
 
 @CrossOrigin("http://localhost:63344")
 @org.springframework.web.bind.annotation.RestController
@@ -28,7 +28,8 @@ public class RestController {
     @Qualifier(value = "repo")
     Test_Repo test_repo;
     @Qualifier(value = "logset")
-    SomeService someService;
+
+    Logger log = LoggerFactory.getLogger("trco");
 
     //DBMS SQL Query :: SELECT * FROM <TABLE_NAME>
     @GetMapping(value = "/findAll")
@@ -89,7 +90,7 @@ public class RestController {
         //  return null;
         test_repo.findById(id).flatMap(db_object -> {
             db_object.setHeart(heart);
-            System.out.println("{'device':'" + db_object.getDevice() + "','heart':'" + db_object.getHeart() + "'}");
+            log.info("*{" + "'name':'" + db_object.getName() + "'," + "'device':'" + db_object.getDevice() + "','heart':'" + db_object.getHeart() + "'}");
             return test_repo.save(db_object);
         }).subscribe().toString();
     }
@@ -116,10 +117,25 @@ public class RestController {
         ).isDisposed();
     }
 
+//    @GetMapping(value = "/refreshByUserInfo")
+//    public void refreshByUserInfo() {
+//        test_repo.findAll().flatMap(db_object -> {
+//            db_object.setHeart("0");
+//            db_object.setName("-");
+//            db_object.setAge("0");
+//            db_object.setMaximumHeart("0");
+//            db_object.setStableHeart("0");
+//            db_object.setExerciseIntensity_max("0");
+//            db_object.setExerciseIntensity_min("0");
+//            db_object.setCarbonenRate_max("0");
+//            db_object.setCarbonenRate_min("0");
+//            return test_repo.save(db_object);
+//        }).subscribe(System.out::println);
+//    }
 
-    @GetMapping(value = "/test")
-    public String test(@RequestParam("id") String id, @RequestParam("heart") String heart) {
-        System.out.println("===== test request success ===== Param : " + id + "||" + heart);
-        return "test request success";
-    }
+//    @GetMapping(value = "/test")
+//    public String test(@RequestParam("id") String id, @RequestParam("heart") String heart) {
+//        System.out.println("===== test request success ===== Param : " + id + "||" + heart);
+//        return "test request success";
+//    }
 }

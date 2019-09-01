@@ -8,6 +8,7 @@ public class KimvaroApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(KimvaroApplication.class, args);
+
     }
 
 }

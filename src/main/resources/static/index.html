@@ -53,15 +53,14 @@
                         var json = JSON.parse(xhr.responseText);
                         for (var i = 0; i < json.length; i++) {
                             console.log(json);
+                            var num = i+1;
                             if (first) {
-                                console.log("true");
                                 //처음접속
                                 //테이블생성 디바이스 이름으로 아이디구분
-                                createTable(json[i].carbonenRate_max, json[i].carbonenRate_min, json[i].device, json[i].exerciseIntensity_max, json[i].exerciseIntensity_min, json[i].heart, json[i].id, json[i].maximumHeart, json[i].name);
+                                createTable(json[i].carbonenRate_max, json[i].carbonenRate_min, json[i].device, json[i].exerciseIntensity_max, json[i].exerciseIntensity_min, json[i].heart, json[i].id, json[i].maximumHeart, json[i].name,num);
                             } else {
                                 //테이블 업데이트
-                                updateTable(json[i].carbonenRate_max, json[i].carbonenRate_min, json[i].device, json[i].exerciseIntensity_max, json[i].exerciseIntensity_min, json[i].heart, json[i].id, json[i].maximumHeart, json[i].name);
-                                console.log("false");
+                                updateTable(json[i].carbonenRate_max, json[i].carbonenRate_min, json[i].device, json[i].exerciseIntensity_max, json[i].exerciseIntensity_min, json[i].heart, json[i].id, json[i].maximumHeart, json[i].name, num);
                                 var userHaertRate = json[i].heart;
                                 var userCarbonenRate_min = json[i].carbonenRate_min;
                                 var userCarbonenRate_max = json[i].carbonenRate_max;
